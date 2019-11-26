@@ -228,8 +228,16 @@ class Datatable extends React.Component<DatatableUnionProps, IDatatableState> {
                     break;
                   case 'array':
                     if (val.length > 0) {
-                      tdContent = val.join(" | ")
+                      const values: string[] = [];
+                      val.forEach((element: any) => {
+                        if(element.hasOwnProperty('Name')) {
+                          values.push(element.Name);
+                        }
+                      });
+                      tdContent = values.join(' | ')
                     }
+
+
                     break;
                   case 'chips':
                     console.log(`val: ${JSON.stringify(val)}`)
