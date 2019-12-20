@@ -59,8 +59,9 @@ $ npm install --save font-awesome
 ** Note : to use the icon just import like below in your component
 import 'font-awesome/css/font-awesome.min.css';
 
-## Installing TSLint-React:
+<!-- ## Installing TSLint-React:
 $ npm install --save-dev tslint tslint-react
+$ npm install --save-dev tslint-config-prettier
 
 Type the following command to generate a tslint.json file with default options.
 $ npx tslint --init
@@ -72,7 +73,8 @@ Replace this file with the following:
 {
     "defaultSeverity": "error",
     "extends": [
-        "tslint-react"
+        "tslint-react",
+        "tslint-config-prettier"
     ],
     "jsRules": {
     },
@@ -92,13 +94,13 @@ Replace this file with the following:
             "node_modules/**/*.ts"
        ]
    }
-}
+} -->
 
 ## Other packages
 
 **eslint**
 $ npm install eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --dev
- 
+
 
 **Prettier**
 $ npm install prettier --save-dev
@@ -118,13 +120,9 @@ Add code in config.ts:
 `
 import { configure } from "@storybook/react";
 
-const req = require.context("../src", true, /\.stories\.tsx$/);
+import 'bootstrap/dist/css/bootstrap.css';
 
-function loadStories() {
-    req.keys().forEach(req);
-}
-
-configure(loadStories, module);
+configure(require.context('../src', true, /\.stories\.tsx$/), module);
 `
 
 add these two line in package.json, section 'scripts':
@@ -132,4 +130,5 @@ add these two line in package.json, section 'scripts':
 "build-storybook": "build-storybook -s public"
 
 Launch storybook
-$ npm storybook
+$ npm run storybook
+

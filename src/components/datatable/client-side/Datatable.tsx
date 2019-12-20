@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { DatatableHeader } from './DatatableHeader';
 import { IDatatableColumnDefs, IActions } from './DatatableModels';
-import { Link } from 'react-router-dom';
 import PaginationComponent from './DatatablePagination';
 import './Datatable.css';
 
@@ -11,6 +10,7 @@ interface IDatatableState {
   dataPagination?: any[];
   currentPage: number;
 }
+
 
 interface IDatatableProps {
   headers?: any;
@@ -178,7 +178,7 @@ class Datatable extends React.Component<DatatableUnionProps, IDatatableState> {
         <thead style={{ backgroundColor: '#212529' }}>
           <tr style={{ fontSize: '12px' }}>
             {cols}
-            {
+            {this.props.actions && this.props.actions.length > 0 && 
               <th colSpan={2} style={{ color: '#fff' }}>
                 Actions
               </th>
@@ -296,8 +296,8 @@ class Datatable extends React.Component<DatatableUnionProps, IDatatableState> {
                   const pattern = /:id/gi;
                   const link = `${el.link.replace(pattern, item[identityCol])}`;
                   actionContent = (
-                    <Link
-                      to={link}
+                    <a
+                      href={link}
                       className="btn btn-sm btn-flat pull-left action-icon"
                     >
                       <i
@@ -306,24 +306,26 @@ class Datatable extends React.Component<DatatableUnionProps, IDatatableState> {
                       >
                         {el.icon}
                       </i>
-                    </Link>
+                    </a>
                   );
                 }
 
                 if (el.onClickEvent && typeof el.onClickEvent === 'function') {
                   actionContent = (
-                    <Link
-                      to={''}
+                    // eslint-disable-next-line
+                    <a
+                      href={'#'}
                       onClick={el.onClickEvent(item[identityCol])}
                       className="btn btn-sm btn-flat pull-left action-icon"
                     >
+                      
                       <i
                         className="material-icons"
                         style={{ color: '#e6496a' }}
                       >
                         {el.icon}
                       </i>
-                    </Link>
+                    </a>
                   );
                 }
 
