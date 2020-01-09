@@ -14,7 +14,7 @@ export interface IColumnType {
 
 export interface IDatatableColumnDefs {
   headerTitle: string;
-  dataField: string;
+  dataField: any;
   isKey?: boolean;
   actions?: IActions[];
   columnType?: IColumnType;
