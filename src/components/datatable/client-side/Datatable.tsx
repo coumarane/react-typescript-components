@@ -204,6 +204,9 @@ class Datatable extends React.Component<DatatableUnionProps, IDatatableState> {
             .map((col, i) => {
               const val = item[col.dataField];
               let tdContent = val;
+              if (typeof(val) === "boolean") {
+                tdContent = val === true ? "true" : "false"
+              }
 
               if (col.columnType) {
                 // console.log(`columnType: ${col.columnType.type}`)
